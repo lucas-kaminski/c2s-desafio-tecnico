@@ -5,7 +5,7 @@ from app.utils.postgresql import get_session
 router = APIRouter()
 
 
-@router.get("/")
-def get_all_brands(session=Depends(get_session)):
-    all_brands = select_all_brands(session)
+@router.get("/brands")
+def get_all_brands(session=Depends(get_session), name: str = None):
+    all_brands = select_all_brands(session, name)
     return {"result": all_brands}

@@ -5,5 +5,5 @@ from app.routers.vehicles import router as vehicles_router
 
 app = FastAPI(title="C2S Desafio Técnico", version="0.1.0")
 
-app.include_router(brands_router, prefix="/brands", tags=["brands"])
-app.include_router(vehicles_router, prefix="/vehicles", tags=["vehicles"])
+app.include_router(brands_router, tags=["brands"])
+app.include_router(vehicles_router, tags=["vehicles"])
