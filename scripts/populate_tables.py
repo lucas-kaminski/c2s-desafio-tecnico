@@ -18,7 +18,7 @@ motor = ["1.0", "1.4", "1.6", "2.0", "2.4", "3.0"]
 number_of_doors = [2, 3, 4, 5]
 
 colors = []
-with open("content/colors.json", "r", encoding="utf-8") as file:
+with open("scripts/json/colors.json", "r", encoding="utf-8") as file:
     colors = json.load(file)
     for color in colors:
         color_instance = Color()
@@ -30,7 +30,7 @@ with open("content/colors.json", "r", encoding="utf-8") as file:
             print(f"Error saving color {color_instance.name}: {e}")
 
 fuel_types = []
-with open("content/fuel_types.json", "r", encoding="utf-8") as file:
+with open("scripts/json/fuel_types.json", "r", encoding="utf-8") as file:
     fuel_types = json.load(file)
     for fuel_type in fuel_types:
         fuel_type_instance = FuelType()
