@@ -1,0 +1,16 @@
+[project]
+name = "c2s-desafio-tecnico"
+version = "0.1.0"
+description = "Desafio técnico para a vaga de Desenvolvedor Python Sênior na empresa C2S - Contact 2 Sale"
+authors = [
+    {name = "Lucas Kaminski",email = "lucas.kssilveira@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
