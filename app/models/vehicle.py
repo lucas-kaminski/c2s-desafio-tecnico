@@ -22,3 +22,19 @@ class Vehicle(Base):
     brand = relationship("Brand", back_populates="vehicles")
     color = relationship("Color", back_populates="vehicles")
     fuel_type = relationship("FuelType", back_populates="vehicles")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "model": self.model,
+            "year": self.year,
+            "price": self.price,
+            "motor": self.motor,
+            "number_of_doors": self.number_of_doors,
+            "brand_id": self.brand_id,
+            "brand": self.brand.name,
+            "color_id": self.color_id,
+            "color": self.color.name,
+            "fuel_type_id": self.fuel_type_id,
+            "fuel_type": self.fuel_type.name,
+        }
