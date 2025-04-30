@@ -5,7 +5,7 @@ from app.models.fuel_type import FuelType
 from app.models.vehicle import Vehicle
 from app.connectors.external.brasilapi import BrasilAPI
 from app.utils.postgresql import get_session, save_to_database
-from app.controllers.brand import get_all_brands
+from app.controllers.brands import select_all_brands
 import json
 
 db_session = next(get_session())
@@ -52,7 +52,7 @@ for brand in all_brands:
     except Exception as e:
         print(f"Error saving brand {brand_instance.name}: {e}")
 
-all_brands_in_db = get_all_brands(db_session)
+all_brands_in_db = select_all_brands(db_session)
 print(f"Total brands in DB: {len(all_brands_in_db)}")
 
 max_cars_per_brand = input("Enter the maximum number of cars per brand: ")
