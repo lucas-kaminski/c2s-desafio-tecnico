@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "nome": "vermelho"
+  },
+  {
+    "id": 2,
+    "nome": "azul"
+  },
+  {
+    "id": 3,
+    "nome": "amarelo"
+  },
+  {
+    "id": 4,
+    "nome": "verde"
+  },
+  {
+    "id": 5,
+    "nome": "laranja"
+  },
+  {
+    "id": 6,
+    "nome": "roxo"
+  },
+  {
+    "id": 7,
+    "nome": "rosa"
+  },
+  {
+    "id": 8,
+    "nome": "marrom"
+  },
+  {
+    "id": 9,
+    "nome": "preto"
+  },
+  {
+    "id": 10,
+    "nome": "branco"
+  },
+  {
+    "id": 11,
+    "nome": "cinza"
+  },
+  {
+    "id": 12,
+    "nome": "bege"
+  },
+  {
+    "id": 13,
+    "nome": "dourado"
+  },
+  {
+    "id": 14,
+    "nome": "prateado"
+  },
+  {
+    "id": 15,
+    "nome": "turquesa"
+  },
+  {
+    "id": 16,
+    "nome": "violeta"
+  },
+  {
+    "id": 17,
+    "nome": "bordô"
+  },
+  {
+    "id": 18,
+    "nome": "ciano"
+  },
+  {
+    "id": 19,
+    "nome": "salmon"
+  },
+  {
+    "id": 20,
+    "nome": "oliva"
+  }
+]

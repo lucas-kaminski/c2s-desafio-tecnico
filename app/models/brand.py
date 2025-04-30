@@ -8,6 +8,5 @@ class Brand(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    abbreviation = Column(String)
 
     vehicles = relationship("Vehicle", back_populates="brand")
