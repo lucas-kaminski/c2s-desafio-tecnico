@@ -18,6 +18,7 @@ years = list(range(2000, 2024))
 price = list(range(10000, 200000, 1000))
 motor = ["1.0", "1.4", "1.6", "2.0", "2.4", "3.0"]
 number_of_doors = [2, 3, 4, 5]
+mileage = list(range(0, 200000, 1000))
 
 colors = []
 with open("scripts/json/colors.json", "r", encoding="utf-8") as file:
@@ -94,6 +95,8 @@ for brand in all_brands_in_db:
         car_instance.price = random.choice(price)
         car_instance.motor = random.choice(motor)
         car_instance.number_of_doors = random.choice(number_of_doors)
+        car_instance.mileage = random.choice(mileage)
+        car_instance.status_id = random.choice(statuses)["id"]
 
         try:
             save_to_database(db_session, car_instance)
