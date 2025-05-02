@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nome": "DISPONÍVEL"
+  },
+  {
+    "id": 2,
+    "nome": "VENDIDO"
+  },
+  {
+    "id": 3,
+    "nome": "RESERVADO"
+  },
+  {
+    "id": 4,
+    "nome": "EM MANUTENÇÃO"
+  },
+  {
+    "id": 5,
+    "nome": "EM PREPARAÇÃO"
+  }
+]

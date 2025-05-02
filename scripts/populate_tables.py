@@ -2,6 +2,7 @@ import random
 from app.models.brand import Brand
 from app.models.color import Color
 from app.models.fuel_type import FuelType
+from app.models.status import Status
 from app.models.vehicle import Vehicle
 from app.connectors.external.brasilapi import BrasilAPI
 from app.utils.postgresql import get_session, save_to_database
@@ -41,6 +42,18 @@ with open("scripts/json/fuel_types.json", "r", encoding="utf-8") as file:
         except Exception as e:
             print(f"Error saving fuel type {fuel_type_instance.name}: {e}")
 
+
+statuses = []
+with open("scripts/json/status.json", "r", encoding="utf-8") as file:
+    statuses = json.load(file)
+    for status in statuses:
+        status_instance = Status()
+        status_instance.id = status["id"]
+        status_instance.name = status["nome"]
+        try:
+            save_to_database(db_session, status_instance)
+        except Exception as e:
+            print(f"Error saving status {status_instance.name}: {e}")
 
 all_brands = brasil_api.get_all_car_brands()
 for brand in all_brands:

@@ -16,15 +16,20 @@ def main():
     messages = []
     SYSTEM_PROMPT = """
         Você é um assistente de concessionária. Siga estas regras:
-        1. Sempre que um usuário perguntar da disponibilidade de um veículo, você deve chamar a função `brands` para pegar o id da marca no nosso banco de dados e procurar nos veículos disponíveis.
+        1 - Responda apenas em português.
+        2 - Se não souber a resposta, diga que não sabe.
+        3 - Mande as informações do carro de forma simples, em uma linha.
+        4 - Não invente informações, apenas busque no banco de dados.
         """
 
     messages.append({"role": "system", "content": SYSTEM_PROMPT})
 
-    while True:
-        user_input = input("Você: ")
+    print("Digite 'sair' para encerrar a conversa.\n")
 
-        if user_input.lower() in ["sair", "exit", "quit"]:
+    while True:
+        user_input = input("Insira sua pergunta: ")
+        if user_input.lower() == "sair":
+            print("Encerrando a conversa.")
             break
 
         messages.append({"role": "user", "content": user_input})
@@ -38,7 +43,8 @@ def main():
 
         choice = response.choices[0]
         message = choice.message
-        if message.function_call:
+
+        while hasattr(message, "function_call") and message.function_call:
             func_call = message.function_call
             func_name = func_call.name
             arguments = json.loads(func_call.arguments)
@@ -51,15 +57,19 @@ def main():
                     "content": json.dumps(result),
                 }
             )
+            response = client.chat.completions.create(
+                model="gpt-4",
+                messages=messages,
+                functions=ALL_SCHEMAS,
+                function_call="auto",
+            )
+            choice = response.choices[0]
+            message = choice.message
 
-            followup = client.chat.completions.create(model="gpt-4", messages=messages)
+        reply = message.content
+        messages.append({"role": "assistant", "content": reply})
 
-            reply = followup.choices[0].message.content
-        else:
-            reply = message.content
-
-        print(f"LLM: {reply}")
-        # messages.append({"role": "assistant", "content": reply})
+        print(f"\nResposta: {reply}\n")
 
 
 if __name__ == "__main__":

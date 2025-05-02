@@ -8,7 +8,6 @@ class MCPClient:
         self.base_url = SERVER_URL
 
     def call_function(self, function_name: str, params: dict):
-        print(f"Chamando função {function_name} com parâmetros: {params}")
         url = f"{self.base_url}/{function_name}"
         response = requests.get(url, params=params, timeout=10)
 
