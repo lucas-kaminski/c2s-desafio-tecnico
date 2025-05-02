@@ -1,9 +1,10 @@
+import json
+
 from openai import OpenAI
 
-import json
 from app.config import OPENAI_API_KEY
-from app.utils.schemas import ALL_SCHEMAS
 from app.connectors.database.mcp import MCPClient
+from app.utils.schemas import ALL_SCHEMAS
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 

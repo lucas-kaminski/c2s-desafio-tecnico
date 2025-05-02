@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, Query
 from typing import Optional
+
+from fastapi import APIRouter, Depends, Query
+
 from app.controllers.vehicles import select_all_with_filters
 from app.utils.postgresql import get_session
 

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+
 from app.controllers.brands import select_all_brands
 from app.utils.postgresql import get_session
 

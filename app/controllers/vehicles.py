@@ -1,4 +1,3 @@
-from app.models.color import Color
 from app.models.vehicle import Vehicle
 
 
