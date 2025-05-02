@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  code-quality-and-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run code quality (flake8)
+        run: poetry run flake8 .
+
+      - name: Run code formatter (black)
+        run: poetry run black --check .
+
+      - name: Check import order (isort)
+        run: poetry run isort --check-only .
+
+      - name: Run type checks (mypy)
+        run: poetry run mypy .
+
+      - name: Run security checks (bandit)
+        run: poetry run bandit -r .
+
+      - name: Run tests
+        run: poetry run pytest
