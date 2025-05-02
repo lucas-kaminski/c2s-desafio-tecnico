@@ -55,8 +55,8 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
 1. Clone o repositório:
 
 ```
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/lucas-kaminski/c2s-desafio-tecnico
+cd c2s-desafio-tecnico
 ```
 
 2. Configure as variáveis de ambiente:
