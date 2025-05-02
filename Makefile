@@ -12,3 +12,12 @@ run-server:
 
 run-cli:
 	poetry run python -m app.cli
+
+run-tests:
+	poetry run pytest
+
+pre-commit-install:
+	poetry run pre-commit install
+
+pre-commit-run:
+	poetry run pre-commit run --all-files
