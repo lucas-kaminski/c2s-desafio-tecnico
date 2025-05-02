@@ -36,5 +36,5 @@ jobs:
 
       - name: Run tests
         env:
-          SKIP_ENV_CHECK: "True"
+          ENVIRONMENT: "test"
         run: poetry run pytest
