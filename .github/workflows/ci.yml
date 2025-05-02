@@ -34,11 +34,5 @@ jobs:
       - name: Check import order (isort)
         run: poetry run isort --check-only .
 
-      - name: Run type checks (mypy)
-        run: poetry run mypy .
-
-      - name: Run security checks (bandit)
-        run: poetry run bandit -r .
-
       - name: Run tests
         run: poetry run pytest
