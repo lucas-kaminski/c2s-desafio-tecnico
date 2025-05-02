@@ -23,7 +23,7 @@ jobs:
         uses: abatilo/actions-poetry@v2
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Run code quality (flake8)
         run: poetry run flake8 .
