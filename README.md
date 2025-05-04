@@ -6,7 +6,7 @@ Este projeto simula uma API de atendimento integrada a um modelo de linguagem (L
 
 - Criar uma API para consulta desses dados;
 
-- Integrar essa API a um LLM via um servidor MCP para responder perguntas de forma automatizada.
+- Integrar essa API a um LLM via um servidor MCP para responder perguntas de forma automatizada a partir de um CLI.
 
 ## Solução proposta
 
@@ -62,7 +62,7 @@ cd c2s-desafio-tecnico
 2. Configure as variáveis de ambiente:
 
 ```
-Copie o arquivo .env.example para .env e preencha os valores necessários.
+Copie o arquivo .env.template para .env e preencha os valores necessários.
 ```
 
 3. Instale as dependências do projeto com Poetry:
@@ -74,7 +74,7 @@ poetry install
 4. Inicie o banco de dados (via Docker Compose ou localmente):
 
 ```
-docker-compose up -d database
+docker compose up -d database
 ```
 
 5. Execute os scripts de criação das tabelas no banco de dados.
@@ -142,9 +142,10 @@ Os testes de qualidade do código foram implementados utilizando o GitHub Action
 Tratando-se de um desafio técnico, o foco foi na implementação de uma solução funcional. No entanto, existem várias melhorias que podem ser feitas para aprimorar a aplicação, como por exemplo:
 
 - Melhor administração do número de tokens na conversa com o LLM, evitando erros de limite de tokens.
-- Aumentar a cobertura de testes.
-- Implementar algumas melhorias de código, como melhor logging e tratamento de erros.
-- etc...
+- Aumentar a cobertura de testes, coloquei somente unitários, mas poderia ter mais testes de integração e funcionais.
+- Colocar uma camada de segurança na API, para que a LLM tenha um fluxo de autenticação e autorização para acessar os dados. Rate limiting também poderia ser implementado para evitar abusos.
+- Habilitar outros módulos nativos do FastAPI para melhor métricas
+- Fazer o CD para idealizar o deploy do projeto em produção.
 
 ## Log de desenvolvimento
 
@@ -187,3 +188,11 @@ Dia 3 - 02/05/2025 (+3h de atuação)
 - Iniciei o dia melhorando as rotas e comunicação da LLM, ampliando os parametros que a rota de coletar carro recebia, mudando as models para ter mais opções de dados, alimentando o seed do banco de dados com os dados novos e por fim, rodando tudo para validar um bom funcionamento e resposta da LLM.
 - Criei toda a estrutura de CI do projeto, focando em ferramentas como flake8, black e isort junto com alguns testes básicos no pytest e juntando tudo num workflow do github, sofri um pouco com as configs do workflow, principalmente na parte do teste, mas fiz tudo que precisava para rodar e ficar tudo verde. coloquei também o pre-commit, uma ferramenta mto boa nesse sentido de garantir tudo certinho e evitar duplo commit para consertar erro básico de code import, etc...
 - Criei a documentação README.md do projeto, irei oficializar em vídeos apresentado tanto a demo quanto o lado técnico para enviar tudo por e-mail e aguardar a avaliação.
+
+Dia 4 - 03/05/2025 (+1h de atuação)
+
+- Criei o logger para deixar o processo de criar o banco mais claro e fácil de entender no vídeo.
+- Realizei leves alterações no README.md para melhorar a apresentação do projeto e facilitar o entendimento do mesmo.
+- [Fiz o vídeo de apresentação técnica do projeto](https://youtu.be/9CeDuvQ6CTg).
+
+- [Fiz o vídeo de apresentação da demo do projeto](https://youtu.be/9kDv8cKS5ZM).
