@@ -1,4 +1,5 @@
 import json
+import logging
 import random
 
 from app.connectors.external.brasilapi import BrasilAPI
@@ -9,6 +10,8 @@ from app.models.fuel_type import FuelType
 from app.models.status import Status
 from app.models.vehicle import Vehicle
 from app.utils.postgresql import get_session, save_to_database
+
+logger = logging.getLogger(__name__)
 
 db_session = next(get_session())
 
@@ -30,7 +33,7 @@ with open("scripts/json/colors.json", "r", encoding="utf-8") as file:
         try:
             save_to_database(db_session, color_instance)
         except Exception as e:
-            print(f"Error saving color {color_instance.name}: {e}")
+            logger.error(f"Error saving color {color_instance.name}: {e}")
 
 fuel_types = []
 with open("scripts/json/fuel_types.json", "r", encoding="utf-8") as file:
@@ -42,7 +45,7 @@ with open("scripts/json/fuel_types.json", "r", encoding="utf-8") as file:
         try:
             save_to_database(db_session, fuel_type_instance)
         except Exception as e:
-            print(f"Error saving fuel type {fuel_type_instance.name}: {e}")
+            logger.error(f"Error saving fuel type {fuel_type_instance.name}: {e}")
 
 
 statuses = []
@@ -55,7 +58,7 @@ with open("scripts/json/status.json", "r", encoding="utf-8") as file:
         try:
             save_to_database(db_session, status_instance)
         except Exception as e:
-            print(f"Error saving status {status_instance.name}: {e}")
+            logger.error(f"Error saving status {status_instance.name}: {e}")
 
 all_brands = brasil_api.get_all_car_brands()
 for brand in all_brands:
@@ -65,21 +68,40 @@ for brand in all_brands:
     try:
         save_to_database(db_session, brand_instance)
     except Exception as e:
-        print(f"Error saving brand {brand_instance.name}: {e}")
+        logger.error(f"Error saving brand {brand_instance.name}: {e}")
 
 all_brands_in_db = select_all_brands(db_session)
-print(f"Total brands in DB: {len(all_brands_in_db)}")
 
-max_cars_per_brand: int = input("Enter the maximum number of cars per brand: ")
+logger.info(f"Total of brands inserted on database: {len(all_brands_in_db)}")
+
+max_brands_must_be_inserted = input(
+    "Enter the maximum number of brands to be inserted (0 for all): "
+)
+try:
+    max_brands_must_be_inserted = int(max_brands_must_be_inserted)
+except Exception:
+    print("Invalid input. Using default value of 0 (all brands).")
+    max_brands_must_be_inserted = 0
+
+if max_brands_must_be_inserted > 0:
+    all_brands_in_db = all_brands_in_db[:max_brands_must_be_inserted]
+
+max_cars_per_brand: int = input(
+    "Enter the maximum number of cars per brand (0 for all): "
+)
 try:
     max_cars_per_brand = int(max_cars_per_brand)
 except Exception:
-    print("Invalid input. Using default value of 10.")
-    max_cars_per_brand = 10
+    print("Invalid input. Using default value of 0 (all cars).")
+    max_cars_per_brand = 0
 
 
 for brand in all_brands_in_db:
     all_cars_of_brand = brasil_api.get_all_cars_by_brand(brand.id)
+
+    if max_cars_per_brand > 0:
+        all_cars_of_brand = all_cars_of_brand[:max_cars_per_brand]
+
     for car in all_cars_of_brand:
         car_instance = Vehicle()
 
@@ -100,6 +122,12 @@ for brand in all_brands_in_db:
 
         try:
             save_to_database(db_session, car_instance)
-            print(f"Saved car {car_instance.model} of brand {brand.name}")
         except Exception as e:
             print(f"Error saving car {car_instance.model}: {e}")
+
+    all_cars_of_brand_in_db = (
+        db_session.query(Vehicle).filter_by(brand_id=brand.id).all()
+    )
+    logger.info(
+        f"Total of cars inserted on database for brand {brand.name}: {len(all_cars_of_brand_in_db)}"
+    )
