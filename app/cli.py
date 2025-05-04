@@ -27,6 +27,11 @@ def main():
 
     print("Digite 'sair' para encerrar a conversa.\n")
 
+    print("Bem-vindo ao assistente de concessionária!")
+    print(
+        "Você pode perguntar sobre os carros disponíveis, preços, características e muito mais.\n"
+    )
+
     while True:
         user_input = input("Insira sua pergunta: ")
         if user_input.lower() == "sair":
